@@ -1,0 +1,33 @@
+#include <stdio.h>
+#include <string.h>
+
+struct student {
+    int roll;
+    char name[30];
+    float marks;
+};
+
+int main() {
+    struct student s[3] = {
+        {11, "Suraj", 85.5},
+        {22, "Ravi", 90.0},
+        {33, "Amit", 78.0}
+    };
+
+    printf("All Students:\n");
+    for (int i = 0; i < 3; i++) {
+        printf("Roll: %d, Name: %s, Marks: %.2f\n", s[i].roll, s[i].name, s[i].marks);
+    }
+
+    int key = 22;
+    int found = 0;
+    for (int i = 0; i < 3; i++) {
+        if (s[i].roll == key) {
+            printf("\nFound roll %d: Name=%s, Marks=%.2f\n", key, s[i].name, s[i].marks);
+            found = 1;
+            break;
+        }
+    }
+    if (!found) printf("\nRoll %d not found.\n", key);
+    return 0;
+}
