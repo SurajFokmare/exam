@@ -1,0 +1,35 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node { int data; struct Node *next; };
+struct Node *top = NULL;
+
+void push(int x){
+    struct Node *n = malloc(sizeof(struct Node));
+    n->data = x; n->next = top; top = n;
+}
+
+int pop(){
+    if(!top){ printf("Stack Underflow\n"); return -1; }
+    int val = top->data;
+    struct Node *tmp = top; top = top->next; free(tmp);
+    return val;
+}
+
+void display(){
+    if(!top){ printf("[ empty ]\n"); return; }
+    printf("Stack (top->bottom): ");
+    for(struct Node *p = top; p; p = p->next) printf("%d ", p->data);
+    printf("\n");
+}
+
+int main(){
+    push(1); push(2); push(3);
+    printf("After push 1,2,3:\n"); display();
+    printf("Popped: %d\n", pop());
+    printf("After popping one:\n"); display();
+
+    // free remaining nodes
+    while(top) pop();
+    return 0;
+}
