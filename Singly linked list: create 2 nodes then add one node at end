@@ -1,0 +1,26 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node { int data; struct Node *next; };
+
+int main(){
+    struct Node *head = malloc(sizeof(struct Node));
+    struct Node *n2 = malloc(sizeof(struct Node));
+    head->data = 10; head->next = n2;
+    n2->data = 20;   n2->next = NULL;
+
+    struct Node *newNode = malloc(sizeof(struct Node));
+    newNode->data = 30; newNode->next = NULL;
+
+    struct Node *p = head;
+    while(p->next) p = p->next;
+    p->next = newNode;
+
+    printf("After adding at end: ");
+    for(p = head; p; p = p->next) printf("%d ", p->data);
+    printf("\n");
+
+    struct Node *tmp;
+    while(head){ tmp = head; head = head->next; free(tmp); }
+    return 0;
+}
